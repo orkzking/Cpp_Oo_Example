@@ -1,5 +1,9 @@
-#include <iostream>
+#ifdef NOANDROID
+#include "std_header.h"
+#else
 #include "/storage/0000-0000/Android/data/com.termux/files/cpp_oo_example_code/std_header.h"
+#endif
+
 class Felement {
 	protected:
 		int zNumber;
