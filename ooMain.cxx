@@ -1,43 +1,14 @@
 #ifdef NOANDROID
 #include "std_header.h"
+#include "Felement.cxx"
 #else
 #include "/storage/0000-0000/Android/data/com.termux/files/cpp_oo_example_code/std_header.h"
+#include "/storage/0000-0000/Android/data/com.termux/files/cpp_oo_example_code/Felement.cxx"
 #endif
 
-class Felement {
-	protected:
-		int zNumber;
-		std::vector<int> zNodes;
-	
-	public:
-		Felement(int& pNumber, std::vector<int>& pNodes) {
-			zNumber = pNumber;
-			zNodes = pNodes;
-		}
-		
-		void set_number(int& pNumber) {
-			zNumber = pNumber;
-		}
-		
-		int get_number() {
-			return zNumber;
-		}
-		
-		std::string toString() {
-			std::string lValue = "";
-			for(int i=0;i<zNodes.size();i++)
-			{
-				lValue += std::to_string(zNodes[i]) + " ";
-			}
-			return lValue;
-		}
-		
-		std::string to_string() {
-			return this->toString();
-		}
-};
+
 int main() { 
-  int a =0;
+  int a =0,dof = 2;
   std::vector<int> lVector;
   char s [100];
 
@@ -53,9 +24,18 @@ int main() {
 	  	lVector.push_back(a);
   }
 
-	Felement lEle(a,lVector);
+	std::list<Felement*> lElements;
 
-	std::cout << "Element " << lEle.get_number() << " has the following nodes:" << lEle.toString() << ". " << std::endl; 
+	lElements.push_back(new QuadEle(a,lVector,dof));
+/*
+	for (std::list<Felement*>::iterator iter = lElements.begin();iter!=lElements.end();++iter)
+	{
+		Felement *ele = *iter;
+		std::cout << "Element " << ele->get_number() << " has the following nodes:" << ele->toString() << ". " << std::endl; 
+	}
+	*/
+	for (auto &i : lElements)
+		std::cout << "Element " << i->get_number() << " has the following nodes:" << i->toString() << "and the matrices have the dimension MxM with M = "<< i->get_MatricesDimensions() << std::endl;
 
 /*
   std::cout << "Type your name: \n"; 
