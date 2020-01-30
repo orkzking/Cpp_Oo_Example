@@ -8,13 +8,13 @@
 
 
 int main() { 
-  int a =0,dof = 2;
+  int a =0,dof = 2,b = 0;
   std::vector<int> lVector;
   char s [100];
 
   std::cout << "This is a sample program." << std::endl;
 
-  std::cout << "Lets generate a finite element. It consists of as many nodes you like.\n Give me the non negative node numbers. A negative input finishes the list." <<std::endl;
+  std::cout << "Lets generate a finite element. It consists of as many nodes you like.\n Give me the non negative node numbers. A negative input finishes the list and is the number of the element." <<std::endl;
 
   while(a>=0)
   {
@@ -23,10 +23,10 @@ int main() {
 	  if(a>=0)
 	  	lVector.push_back(a);
   }
-
+	b = -1*a;
 	std::list<Felement*> lElements;
 
-	lElements.push_back(new QuadEle(a,lVector,dof));
+	lElements.push_back(new QuadEle(b,lVector,dof));
 /*
 	for (std::list<Felement*>::iterator iter = lElements.begin();iter!=lElements.end();++iter)
 	{
